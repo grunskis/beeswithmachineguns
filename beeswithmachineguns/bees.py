@@ -155,6 +155,12 @@ def report():
     """
     Report the status of the load testing servers.
     """
+    instances = _get_running_instances()
+
+    for instance in instances:
+        print 'Bee %s: %s @ %s' % (instance.id, instance.state, instance.ip_address)
+
+def _get_running_instances():
     username, key_name, zone, instance_ids = _read_server_list()
 
     if not instance_ids:
@@ -170,8 +176,7 @@ def report():
     for reservation in reservations:
         instances.extend(reservation.instances)
 
-    for instance in instances:
-        print 'Bee %s: %s @ %s' % (instance.id, instance.state, instance.ip_address)
+    return instances
 
 def down():
     """

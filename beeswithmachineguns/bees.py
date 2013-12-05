@@ -165,7 +165,7 @@ def _get_running_instances():
 
     if not instance_ids:
         print 'No bees have been mobilized.'
-        return
+        sys.exit(1)
 
     ec2_connection = boto.ec2.connect_to_region(_get_region(zone))
 
